@@ -1,0 +1,5 @@
+---
+- name: "Choco push"
+  win_shell: choco push -s "{{ init_choco_internal_repository }}"
+  args:
+    chdir: "{{ choco_package_build_deployment_dir }}\\{{ choco_package_build_package_name }}"

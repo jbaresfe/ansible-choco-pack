@@ -1,2 +1,10 @@
 ---
 # vars file for choco_package_build
+choco_package_build_folder_layout:
+  - tools
+
+choco_package_build_tools_files:
+  generic_setup:
+    - chocolateyinstall.ps1   
+
+choco_package_build_deployment_dir: C:\temp\chocolatey_packages\deployments

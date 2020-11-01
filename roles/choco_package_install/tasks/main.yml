@@ -1,2 +1,13 @@
 ---
 # tasks file for choco_package_install
+- name: Install chocolatey package
+  win_chocolatey:
+    name: "{{ choco_package_install_name }}"
+    state: present
+
+- name: Get chocolatey facts
+  win_chocolatey_facts:
+
+- name: Displays the Packages
+  debug:
+    var: ansible_chocolatey.packages

@@ -1,2 +1,29 @@
 ---
 # tasks file for init_choco
+- name: Ensure Chocolatey itself is installed from the internal repo
+  win_chocolatey:
+    name: chocolatey
+    source: "{{ init_choco_package_chocolatey_repo_url }}"
+
+- name: Add new internal source
+  win_chocolatey_source:
+    name: internal repo
+    state: present
+    source: "{{ init_choco_internal_repository }}"
+    source_username: "{{ init_choco_source_username }}"
+    source_password: "{{ init_choco_source_password }}"
+
+- name: Enable extended chocolatey features
+  win_chocolatey_feature:
+    name: "{{ item }}"
+    state: enabled
+  loop: "{{ init_choco_chocolatey_features }}"
+
+- name: Remove the default public source.
+  win_chocolatey_source:
+    name: chocolatey
+    state: absent
+
+- name: Add chocolatey source api key
+  win_shell: choco setapikey -s "{{ init_choco_internal_repository }}" -k {{ init_choco_api_key }}
+  no_log: false

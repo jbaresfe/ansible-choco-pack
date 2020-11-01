@@ -1,2 +1,9 @@
 ---
 # vars file for init_choco
+init_choco_chocolatey_features:
+  - exitOnRebootDetected 
+  - stopOnFirstPackageFailure 
+  - allowGlobalConfirmation
+  - useEnhancedExitCodes
+
+init_choco_package_chocolatey_repo_url: https://chocolatey.org/api/v2/package/chocolatey

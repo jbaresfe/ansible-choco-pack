@@ -1,0 +1,17 @@
+---
+- name: "Create deployments folder layout"
+  win_file:
+    path: "{{ choco_package_build_deployment_dir }}\\{{ choco_package_build_package_name }}\\{{ choco_package_build_folder_layout_item }}"
+    state: directory
+  loop: "{{ choco_package_build_folder_layout }}"
+  loop_control:
+    loop_var: choco_package_build_folder_layout_item
+
+- name: "Create static files for tools folder"
+  win_copy:
+    src: "../files/{{ choco_package_build_object.package_type }}/{{ choco_package_build_tools_item }}"
+    dest: "{{ choco_package_build_deployment_dir }}\\{{ choco_package_build_package_name }}\\tools\\{{ choco_package_build_tools_item }}"
+  loop: "{{ choco_package_build_tools_files[choco_package_build_object.package_type] }}"
+  loop_control:
+    loop_var: choco_package_build_tools_item
+  when: choco_package_build_tools_files[choco_package_build_object.package_type] is defined

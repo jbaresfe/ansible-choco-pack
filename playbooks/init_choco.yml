@@ -1,0 +1,6 @@
+---
+- name: Init chocolatey
+  hosts: all
+
+  roles:
+    - ../roles/init_choco

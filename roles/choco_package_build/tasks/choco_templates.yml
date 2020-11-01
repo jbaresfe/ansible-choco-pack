@@ -1,0 +1,11 @@
+---
+- name: "Generate nuspec file for Chocolatey package"
+  win_template:
+    src: "../templates/{{ choco_package_build_object.package_type }}/nuspec.j2"
+    dest: "{{ choco_package_build_deployment_dir }}\\{{ choco_package_build_package_name }}\\{{ choco_package_build_package_name }}.nuspec"
+
+- name: "Generate parameter file for chocolateyinstall.ps1 script"
+  win_template:
+    src: "../templates/{{ choco_package_build_object.package_type }}/params.ps1.j2"
+    dest: "{{ choco_package_build_deployment_dir }}\\{{ choco_package_build_package_name }}\\tools\\params.ps1"
+

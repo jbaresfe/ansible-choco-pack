@@ -1,2 +1,27 @@
 ---
-# tasks file for choco_package_build
+# tasks file for init_choco
+- name: "Create object"
+  set_fact:
+    choco_package_build_object: "{{ ansible_choco_packages[choco_package_build_package_name] }}"
+
+- name: "Create chocolatey static files"
+  include_tasks: choco_statics.yml
+
+- name: "Create chocolatey source files"
+  include_tasks: choco_sources.yml
+
+- name: "Create chocolatey template files"
+  include_tasks: choco_templates.yml
+
+- name: "choco pack"
+  win_shell: choco pack ".\{{ choco_package_build_package_name }}.nuspec"
+  args:
+    chdir: "{{ choco_package_build_deployment_dir }}\\{{ choco_package_build_package_name }}"
+
+- name: "choco push"
+  include_tasks: choco_push.yml
+
+- name: "cleanup choco deployment folder"
+  win_file:
+    path: "{{ choco_package_build_deployment_dir }}"
+    state: absent

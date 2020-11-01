@@ -1,0 +1,6 @@
+---
+- name: Init chocolatey
+  hosts: all
+
+  roles:
+    - ../roles/choco_package_build
