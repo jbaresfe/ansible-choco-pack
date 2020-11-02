@@ -1,22 +1,45 @@
-Role Name
+Choco Package Build
 =========
 
-A brief description of the role goes here.
+Role to build Chocolatey packages
 
 Requirements
 ------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+See collection main Readme
 
 Role Variables
 --------------
+Variable | Decription
+------------ | -------------
+init_choco_internal_repository | internal chocolatey repository
+choco_package_build_package_name | Name of the package to build
+choco_package_build_metadata* | dictionary of dictionaries containing metadata definition of packages
+init_choco_source_username | username of internal repository service account
+init_choco_source_password | password of internal repository service account
+init_choco_api_key | api key of internal repository service account
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+* choco_package_build_metadata 
+Example 
+```
+  dotnet:
+    repo_type: internal
+    repo_url: https://jfrog.io/artifactory/example-repo-local/dotnet.exe
+    package_type: generic_setup
+    version: 1.0.0
+    package_executable: dotnet.exe
+    choco_dependencies:
+      java-jre: 1.8
+```
+Variable | Decription
+------------ | -------------
+repo_type | internal or public
+repo_url  | repository url which contains sources of the package
+package_type | generic_setup
+choco_dependencies | dictionary containing dependencies
 
 Dependencies
 ------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+* Role init_choco
 
 Example Playbook
 ----------------
@@ -25,7 +48,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - ../roles/choco_package_build
 
 License
 -------
@@ -34,5 +57,4 @@ BSD
 
 Author Information
 ------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Javier Bares - jbaresfe@redhat.com

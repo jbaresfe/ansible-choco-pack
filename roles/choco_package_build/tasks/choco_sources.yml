@@ -6,9 +6,8 @@
     url_password: "{{ init_choco_source_password }}"
   when: choco_package_build_object.repo_type == "internal"
 
-- name: "{{ Download sources from public repo"
+- name: "Download sources from public repo"
   win_get_url:
     url: "{{ choco_package_build_object.repo_url }}"
     dest: "{{ choco_package_build_deployment_dir }}\\{{ choco_package_build_package_name }}\\tools"
   when: choco_package_build_object.repo_type == "public"
-
