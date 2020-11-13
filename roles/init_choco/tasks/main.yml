@@ -25,4 +25,4 @@
 
 - name: Add chocolatey source api key
   win_shell: choco setapikey -s "{{ init_choco_internal_repository }}" -k {{ init_choco_api_key }}
-  no_log: false
+  no_log: true
