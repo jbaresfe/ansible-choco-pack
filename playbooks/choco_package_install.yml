@@ -3,4 +3,4 @@
   hosts: all
 
   roles:
-    - ../roles/choco_package_install
+    - choco_package_install

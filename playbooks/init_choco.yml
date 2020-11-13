@@ -3,4 +3,4 @@
   hosts: all
 
   roles:
-    - ../roles/init_choco
+    - init_choco
